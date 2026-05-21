@@ -1,0 +1,80 @@
+{
+  "as_of": "2026-05-20",
+  "by_model": [
+    {
+      "model": "Pinnacle Ridge",
+      "segment": "Midsize SUV",
+      "in_transit": 6420,
+      "at_port": 1840,
+      "on_dealer_lot": 18420,
+      "days_supply": 62,
+      "msrp_band": "$38k–$52k",
+      "demand_signal": "strong",
+      "constraint": null
+    },
+    {
+      "model": "Pinnacle Summit SUV",
+      "segment": "Midsize SUV (flagship)",
+      "in_transit": 4280,
+      "at_port": 980,
+      "on_dealer_lot": 9840,
+      "days_supply": 41,
+      "msrp_band": "$44k–$62k",
+      "demand_signal": "very_strong",
+      "constraint": null
+    },
+    {
+      "model": "Pinnacle Volt EV",
+      "segment": "EV Crossover",
+      "in_transit": 1240,
+      "at_port": 320,
+      "on_dealer_lot": 1860,
+      "days_supply": 14,
+      "msrp_band": "$47k–$68k",
+      "demand_signal": "very_strong",
+      "constraint": "chip_allocation: 850-pack ECU shortage, T-Mobile chipset Q3 allocation"
+    },
+    {
+      "model": "Pinnacle Crest",
+      "segment": "Sedan",
+      "in_transit": 3120,
+      "at_port": 740,
+      "on_dealer_lot": 14200,
+      "days_supply": 88,
+      "msrp_band": "$28k–$38k",
+      "demand_signal": "soft",
+      "constraint": null
+    },
+    {
+      "model": "Pinnacle Haul HD",
+      "segment": "Full-size Truck",
+      "in_transit": 5840,
+      "at_port": 1420,
+      "on_dealer_lot": 16240,
+      "days_supply": 58,
+      "msrp_band": "$48k–$78k",
+      "demand_signal": "strong",
+      "constraint": null
+    },
+    {
+      "model": "Pinnacle Vista",
+      "segment": "Compact Crossover",
+      "in_transit": 2840,
+      "at_port": 640,
+      "on_dealer_lot": 10120,
+      "days_supply": 52,
+      "msrp_band": "$26k–$34k",
+      "demand_signal": "stable",
+      "constraint": null
+    }
+  ],
+  "bottleneck_story": {
+    "headline": "Volt EV constrained 6+ weeks: 850-pack ECU supply",
+    "detail": "Tier-1 supplier (Continental Aurora City) reports 850-pack ECU allocation at 38% of Pinnacle's Q2 nomination. Fremont line at 220 units/shift vs 540 nameplate capacity. Dealer order bank: 18,400 units. Estimated unfulfilled demand: $612M revenue at risk Q3.",
+    "actions": [
+      "Reallocated 1,840 partial-build units to Spring Hill for ECU-bypass software config",
+      "Engaged secondary source (Bosch CRX1100) — qualified Q4, ramps Q1 2027",
+      "Dealer holdback released — 12% margin support on Volt EV through Q3"
+    ]
+  }
+}

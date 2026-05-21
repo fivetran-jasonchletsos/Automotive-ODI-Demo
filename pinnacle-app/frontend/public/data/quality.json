@@ -1,0 +1,79 @@
+{
+  "as_of": "2026-05-20",
+  "warranty_rate_per_1000": 142,
+  "warranty_rate_trend_yoy_pct": -8.4,
+  "jd_power_iqs": {
+    "industry_avg_pp100": 192,
+    "pinnacle_pp100": 178,
+    "rank_in_segment": 4,
+    "segment_size": 14,
+    "trailing_quarter_change": -6
+  },
+  "claims_by_part_family": [
+    { "part_family": "Infotainment / HMI",         "claims_90d": 8420, "cost_per_claim_usd": 412,  "rate_per_1000": 28.4, "trend_pct": 14.2 },
+    { "part_family": "HV Battery (EV)",            "claims_90d": 1240, "cost_per_claim_usd": 4820, "rate_per_1000": 18.2, "trend_pct": 38.6 },
+    { "part_family": "Powertrain — Transmission", "claims_90d": 3840, "cost_per_claim_usd": 2840, "rate_per_1000": 14.1, "trend_pct": -4.2 },
+    { "part_family": "Body — Paint & Trim",        "claims_90d": 4280, "cost_per_claim_usd": 612,  "rate_per_1000": 12.8, "trend_pct": 2.1 },
+    { "part_family": "Brakes",                     "claims_90d": 2840, "cost_per_claim_usd": 480,  "rate_per_1000": 10.4, "trend_pct": -8.6 },
+    { "part_family": "Steering & Suspension",      "claims_90d": 2120, "cost_per_claim_usd": 940,  "rate_per_1000": 9.2,  "trend_pct": -2.4 },
+    { "part_family": "Engine — ICE",               "claims_90d": 3640, "cost_per_claim_usd": 3120, "rate_per_1000": 8.4,  "trend_pct": -12.1 },
+    { "part_family": "Climate / HVAC",             "claims_90d": 2980, "cost_per_claim_usd": 540,  "rate_per_1000": 7.2,  "trend_pct": 6.4 }
+  ],
+  "top_issues": [
+    {
+      "issue": "Touchscreen reboot during CarPlay handoff",
+      "model": "Pinnacle Ridge",
+      "model_year": 2024,
+      "production_dates": "2024-08-01 to 2024-11-12",
+      "affected_units": 18420,
+      "claim_count": 2840,
+      "root_cause_status": "confirmed_software",
+      "fix": "OTA HMI-2024.11.3 — 92% deployed",
+      "recall_risk": "low"
+    },
+    {
+      "issue": "HV pack cell imbalance under fast-charge",
+      "model": "Pinnacle Volt EV",
+      "model_year": 2025,
+      "production_dates": "2025-01-01 to 2025-04-30",
+      "affected_units": 4820,
+      "claim_count": 312,
+      "root_cause_status": "8d_in_progress",
+      "fix": "BMS firmware re-cal, pending Tier-1 validation",
+      "recall_risk": "high"
+    },
+    {
+      "issue": "Front-seat occupant detection sensor false-negative",
+      "model": "Pinnacle Crest",
+      "model_year": 2023,
+      "production_dates": "2023-03-01 to 2023-09-30",
+      "affected_units": 42800,
+      "claim_count": 1840,
+      "root_cause_status": "open_supplier_8d",
+      "fix": "Sensor harness clip redesign, supplier change in progress",
+      "recall_risk": "high"
+    },
+    {
+      "issue": "Tailgate latch corrosion (salt belt)",
+      "model": "Pinnacle Haul HD",
+      "model_year": 2022,
+      "production_dates": "2022-01-01 to 2022-12-31",
+      "affected_units": 28400,
+      "claim_count": 1240,
+      "root_cause_status": "confirmed_design",
+      "fix": "TSB-2025-114 plus salvage-rate parts campaign",
+      "recall_risk": "moderate"
+    },
+    {
+      "issue": "Wind-noise around A-pillar",
+      "model": "Pinnacle Summit SUV",
+      "model_year": 2024,
+      "production_dates": "2024-06-01 to 2024-08-15",
+      "affected_units": 6420,
+      "claim_count": 412,
+      "root_cause_status": "confirmed_process",
+      "fix": "Adhesive cure-time spec updated — line ramp complete",
+      "recall_risk": "none"
+    }
+  ]
+}

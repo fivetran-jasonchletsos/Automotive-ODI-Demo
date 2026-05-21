@@ -1,0 +1,38 @@
+{
+  "as_of": "2026-05-20",
+  "active_vehicles": 1204318,
+  "telemetry_events_per_day": 482000000,
+  "ota_program": {
+    "active_campaigns": 4,
+    "rolling_release_pct": 38,
+    "last_30d_success_rate_pct": 98.2,
+    "last_30d_attempts": 642800,
+    "failed_attempts": 11572,
+    "top_failure_reason": "low_battery_at_install_window"
+  },
+  "top_dtcs": [
+    { "dtc": "P0420", "name": "Catalyst System Efficiency Below Threshold", "model": "Pinnacle Crest", "model_year": 2023, "count": 4820, "trend_pct_30d": 12.4, "severity": "moderate" },
+    { "dtc": "P0171", "name": "System Too Lean (Bank 1)",                    "model": "Pinnacle Ridge", "model_year": 2024, "count": 3640, "trend_pct_30d": -3.1, "severity": "low" },
+    { "dtc": "U0100", "name": "Lost Comm with ECM/PCM",                       "model": "Pinnacle Volt EV","model_year": 2025, "count": 2980, "trend_pct_30d": 38.6, "severity": "high" },
+    { "dtc": "P0300", "name": "Random/Multiple Cylinder Misfire",             "model": "Pinnacle Haul HD","model_year": 2024, "count": 2210, "trend_pct_30d": 8.2, "severity": "moderate" },
+    { "dtc": "C1241", "name": "Low Battery Voltage",                          "model": "Pinnacle Summit SUV","model_year": 2024, "count": 1840, "trend_pct_30d": -1.2, "severity": "low" },
+    { "dtc": "B1318", "name": "Battery Voltage Low",                          "model": "Pinnacle Crest", "model_year": 2022, "count": 1620, "trend_pct_30d": 4.1, "severity": "low" },
+    { "dtc": "P0455", "name": "EVAP System Large Leak",                       "model": "Pinnacle Vista", "model_year": 2024, "count": 1380, "trend_pct_30d": 22.4, "severity": "moderate" },
+    { "dtc": "P2096", "name": "Post Catalyst Fuel Trim Low (Bank 1)",         "model": "Pinnacle Ridge", "model_year": 2023, "count": 1240, "trend_pct_30d": 14.7, "severity": "moderate" },
+    { "dtc": "P0128", "name": "Coolant Thermostat Below Regulating Temp",     "model": "Pinnacle Haul HD","model_year": 2023, "count": 1180, "trend_pct_30d": -0.4, "severity": "low" },
+    { "dtc": "P1AAA", "name": "HV Battery Pack Voltage Imbalance",            "model": "Pinnacle Volt EV","model_year": 2025, "count": 980,  "trend_pct_30d": 64.2, "severity": "critical" }
+  ],
+  "predictive_maintenance_alerts": [
+    { "alert_type": "Front brake pad wear", "vehicles_flagged": 14280, "model": "Pinnacle Ridge", "expected_failure_window_days": 60, "confidence": 0.91 },
+    { "alert_type": "12V battery degradation", "vehicles_flagged": 8420, "model": "Pinnacle Crest", "expected_failure_window_days": 45, "confidence": 0.87 },
+    { "alert_type": "HV pack cell imbalance > 80mV", "vehicles_flagged": 1240, "model": "Pinnacle Volt EV", "expected_failure_window_days": 90, "confidence": 0.94 },
+    { "alert_type": "EVAP purge valve sticking", "vehicles_flagged": 6180, "model": "Pinnacle Vista", "expected_failure_window_days": 30, "confidence": 0.82 },
+    { "alert_type": "Cabin air filter overdue", "vehicles_flagged": 42800, "model": "All", "expected_failure_window_days": 30, "confidence": 0.78 }
+  ],
+  "fleet_health": {
+    "vehicles_with_active_dtc": 41280,
+    "vehicles_with_critical_dtc": 1240,
+    "avg_uptime_pct": 99.4,
+    "connectivity_rate_pct": 96.8
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "as_of": "2026-05-20",
+  "fleet_size_volt_ev": 84200,
+  "charging_mix": {
+    "home_l2_pct": 71.2,
+    "public_dcfc_pct": 18.4,
+    "public_l2_pct": 8.1,
+    "workplace_pct": 2.3
+  },
+  "avg_session_kwh": {
+    "home_l2": 18.4,
+    "public_dcfc": 32.1,
+    "public_l2": 12.8,
+    "workplace": 9.6
+  },
+  "range_anxiety_signals": {
+    "low_soc_arrivals_at_dcfc_pct": 14.8,
+    "low_soc_threshold_pct": 8,
+    "median_arrival_soc_pct": 22.4,
+    "trend_yoy_pct": -18.2,
+    "narrative": "Software OTA Volt-2025.7 added predictive routing — median low-SOC arrivals at DCFC down 18% YoY."
+  },
+  "ota_range_improvements": [
+    { "release": "Volt-2024.11", "date": "2024-11-04", "range_delta_mi": 4.2,  "owners_pct_taken": 96.4, "notes": "Cell-balancing v2" },
+    { "release": "Volt-2025.3",  "date": "2025-03-18", "range_delta_mi": 7.8,  "owners_pct_taken": 94.8, "notes": "Regen + HVAC pre-cool tuning" },
+    { "release": "Volt-2025.7",  "date": "2025-07-22", "range_delta_mi": 11.4, "owners_pct_taken": 92.1, "notes": "Predictive route + climate optimization" },
+    { "release": "Volt-2026.2",  "date": "2026-02-11", "range_delta_mi": 6.2,  "owners_pct_taken": 88.6, "notes": "DCFC curve revision, cold-weather pre-conditioning" }
+  ],
+  "nps_by_charging_cluster": [
+    { "cluster": "Home-only L2 (>90% home)",   "owners": 38400, "nps": 78, "share_pct": 45.6 },
+    { "cluster": "Hybrid (mix home + public)", "owners": 31200, "nps": 61, "share_pct": 37.1 },
+    { "cluster": "Public-reliant (apartment / urban)", "owners": 11200, "nps": 24, "share_pct": 13.3 },
+    { "cluster": "Road-trip heavy (>2 long trips/mo)", "owners": 3400,  "nps": 42, "share_pct": 4.0 }
+  ],
+  "headline_insight": "Public-reliant owners drive 4x the NPS gap. CDO target: launch Pinnacle Charge Partner Program to close range-anxiety gap for apartment-dweller cohort."
+}

@@ -1,0 +1,83 @@
+{
+  "as_of": "2026-05-20",
+  "plants": [
+    {
+      "plant_code": "DET-1",
+      "name": "Detroit Assembly",
+      "city": "Detroit",
+      "state": "MI",
+      "lat": 42.3314,
+      "lng": -83.0458,
+      "nameplates": ["Pinnacle Ridge", "Pinnacle Crest"],
+      "units_per_shift": 612,
+      "shifts_per_day": 3,
+      "takt_time_seconds": 58,
+      "oee_pct": 88.4,
+      "first_time_quality_pct": 96.1,
+      "backlog_units": 4820,
+      "target_units": 5400,
+      "status": "on_pace"
+    },
+    {
+      "plant_code": "SP-1",
+      "name": "Spring Hill Assembly",
+      "city": "Spring Hill",
+      "state": "TN",
+      "lat": 35.7512,
+      "lng": -86.9300,
+      "nameplates": ["Pinnacle Summit SUV", "Pinnacle Vista"],
+      "units_per_shift": 740,
+      "shifts_per_day": 3,
+      "takt_time_seconds": 49,
+      "oee_pct": 91.2,
+      "first_time_quality_pct": 97.4,
+      "backlog_units": 1840,
+      "target_units": 6660,
+      "status": "ahead"
+    },
+    {
+      "plant_code": "ARL-1",
+      "name": "Arlington Assembly",
+      "city": "Arlington",
+      "state": "TX",
+      "lat": 32.7357,
+      "lng": -97.1081,
+      "nameplates": ["Pinnacle Haul HD", "Pinnacle Ridge"],
+      "units_per_shift": 480,
+      "shifts_per_day": 2,
+      "takt_time_seconds": 75,
+      "oee_pct": 84.7,
+      "first_time_quality_pct": 94.8,
+      "backlog_units": 7240,
+      "target_units": 2880,
+      "status": "constrained"
+    },
+    {
+      "plant_code": "FRE-1",
+      "name": "Fremont EV Works",
+      "city": "Fremont",
+      "state": "CA",
+      "lat": 37.5485,
+      "lng": -121.9886,
+      "nameplates": ["Pinnacle Volt EV"],
+      "units_per_shift": 220,
+      "shifts_per_day": 2,
+      "takt_time_seconds": 164,
+      "oee_pct": 71.3,
+      "first_time_quality_pct": 92.6,
+      "backlog_units": 11800,
+      "target_units": 880,
+      "status": "chip_constrained"
+    }
+  ],
+  "daily_pace": [
+    { "date": "2026-05-13", "units": 4912 },
+    { "date": "2026-05-14", "units": 5108 },
+    { "date": "2026-05-15", "units": 5040 },
+    { "date": "2026-05-16", "units": 4720 },
+    { "date": "2026-05-17", "units": 0 },
+    { "date": "2026-05-18", "units": 5320 },
+    { "date": "2026-05-19", "units": 5418 },
+    { "date": "2026-05-20", "units": 5212 }
+  ]
+}

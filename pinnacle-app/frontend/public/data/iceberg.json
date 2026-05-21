@@ -1,0 +1,23 @@
+{
+  "tables": [
+    { "database": "bronze", "table": "sap_s4_production_orders_raw",   "rows": 1842600, "bytes": 642184800, "partitions": ["plant_code","posting_date"], "source_system": "sap_s4hana", "last_updated_at": "2026-05-20", "schema_columns": 42 },
+    { "database": "bronze", "table": "sap_s4_material_master_raw",     "rows": 184200,  "bytes": 84218400,  "partitions": ["plant_code"],                "source_system": "sap_s4hana", "last_updated_at": "2026-05-20", "schema_columns": 38 },
+    { "database": "bronze", "table": "dealertrack_inventory_raw",       "rows": 412800,  "bytes": 184820000, "partitions": ["dealer_id","status_date"],   "source_system": "dealertrack_dms", "last_updated_at": "2026-05-20", "schema_columns": 31 },
+    { "database": "bronze", "table": "dealertrack_sales_raw",           "rows": 218400,  "bytes": 92480000,  "partitions": ["sale_month"],                "source_system": "dealertrack_dms", "last_updated_at": "2026-05-20", "schema_columns": 28 },
+    { "database": "bronze", "table": "manheim_wholesale_raw",           "rows": 14820,   "bytes": 8420000,   "partitions": ["sale_date","region"],        "source_system": "manheim",        "last_updated_at": "2026-05-20", "schema_columns": 22 },
+    { "database": "bronze", "table": "telemetry_events_raw",            "rows": 482000000,"bytes": 2842000000,"partitions": ["event_date","vin_prefix"],   "source_system": "telemetry_kafka","last_updated_at": "2026-05-20", "schema_columns": 18 },
+    { "database": "bronze", "table": "salesforce_service_cases_raw",    "rows": 38400,   "bytes": 18240000,  "partitions": ["created_date"],              "source_system": "salesforce_service","last_updated_at":"2026-05-20","schema_columns": 36 },
+    { "database": "bronze", "table": "jd_power_iqs_raw",                "rows": 2840,    "bytes": 1284000,   "partitions": ["quarter"],                   "source_system": "jd_power",       "last_updated_at": "2026-05-20", "schema_columns": 14 },
+    { "database": "silver", "table": "stg_production",                  "rows": 184200,  "bytes": 84020000,  "partitions": ["plant_code"],                "source_system": "sap_s4hana",     "last_updated_at": "2026-05-20", "schema_columns": 24 },
+    { "database": "silver", "table": "stg_dealer_inventory",            "rows": 218400,  "bytes": 92840000,  "partitions": ["region"],                    "source_system": "dealertrack_dms","last_updated_at": "2026-05-20", "schema_columns": 21 },
+    { "database": "silver", "table": "stg_telemetry_daily",              "rows": 124800,  "bytes": 484200000, "partitions": ["event_date"],                "source_system": "telemetry_kafka","last_updated_at": "2026-05-20", "schema_columns": 16 },
+    { "database": "silver", "table": "stg_warranty_cases",               "rows": 38400,   "bytes": 18420000,  "partitions": ["case_month"],                "source_system": "salesforce_service","last_updated_at":"2026-05-20","schema_columns": 18 },
+    { "database": "gold",   "table": "dim_dealers",                      "rows": 280,     "bytes": 184200,    "partitions": [],                            "source_system": "derived",        "last_updated_at": "2026-05-20", "schema_columns": 22 },
+    { "database": "gold",   "table": "dim_vehicles",                     "rows": 1204318, "bytes": 84218400,  "partitions": ["model"],                     "source_system": "derived",        "last_updated_at": "2026-05-20", "schema_columns": 28 },
+    { "database": "gold",   "table": "fct_production_daily",             "rows": 184200,  "bytes": 18420000,  "partitions": ["plant_code","production_date"], "source_system": "derived",     "last_updated_at": "2026-05-20", "schema_columns": 18 },
+    { "database": "gold",   "table": "fct_dealer_inventory_daily",       "rows": 218400,  "bytes": 28420000,  "partitions": ["snapshot_date","region"],    "source_system": "derived",        "last_updated_at": "2026-05-20", "schema_columns": 16 },
+    { "database": "gold",   "table": "fct_telemetry_health_signals",     "rows": 88240,   "bytes": 14820000,  "partitions": ["signal_date","model"],       "source_system": "derived",        "last_updated_at": "2026-05-20", "schema_columns": 19 },
+    { "database": "gold",   "table": "fct_warranty_claims",              "rows": 38400,   "bytes": 12480000,  "partitions": ["claim_month","part_family"], "source_system": "derived",        "last_updated_at": "2026-05-20", "schema_columns": 21 },
+    { "database": "gold",   "table": "fct_quality_recall_risk_signal",   "rows": 14,      "bytes": 18240,     "partitions": [],                            "source_system": "derived",        "last_updated_at": "2026-05-20", "schema_columns": 16 }
+  ]
+}

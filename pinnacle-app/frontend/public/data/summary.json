@@ -1,0 +1,17 @@
+{
+  "units_built_ytd": 412580,
+  "dealer_count": 280,
+  "connected_vehicles": 1204318,
+  "oem_csi": 87.4,
+  "warranty_rate_per_1000": 142,
+  "active_plants": 4,
+  "nameplates": 6,
+  "iceberg_table_count": 14,
+  "bronze_rows": 1842600,
+  "silver_rows": 612400,
+  "gold_rows": 88240,
+  "s3_bytes": 4123890000,
+  "last_sync_at": "2026-05-20",
+  "generated_at": "2026-05-20T11:42:00+00:00",
+  "source": "demo"
+}
