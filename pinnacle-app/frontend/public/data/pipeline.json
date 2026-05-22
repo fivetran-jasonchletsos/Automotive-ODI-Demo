@@ -1,15 +1,15 @@
 {
   "as_of": "2026-05-20",
   "connectors": [
-    { "name": "SAP S/4HANA — OEM ERP",          "source": "sap_s4hana",        "rows_24h": 482000, "last_sync": "2026-05-20T11:08:00Z", "status": "ok",      "lag_minutes": 4 },
-    { "name": "Dealertrack DMS",                 "source": "dealertrack_dms",   "rows_24h": 218400, "last_sync": "2026-05-20T11:14:00Z", "status": "ok",      "lag_minutes": 6 },
-    { "name": "Manheim Used-Vehicle Feed",       "source": "manheim",            "rows_24h": 14820,  "last_sync": "2026-05-20T10:55:00Z", "status": "ok",      "lag_minutes": 12 },
-    { "name": "Connected-Car Telemetry Stream", "source": "telemetry_kafka",   "rows_24h": 482000000, "last_sync": "2026-05-20T11:42:00Z", "status": "ok",     "lag_minutes": 0 },
-    { "name": "Salesforce Service Cloud",        "source": "salesforce_service","rows_24h": 38400,  "last_sync": "2026-05-20T11:11:00Z", "status": "ok",      "lag_minutes": 8 },
-    { "name": "J.D. Power Benchmarks",            "source": "jd_power",          "rows_24h": 2840,   "last_sync": "2026-05-20T03:00:00Z", "status": "ok",      "lag_minutes": 522 }
+    { "name": "SAP S/4HANA — OEM ERP",          "source": "sap_s4hana",        "rows_24h": 482000,    "last_sync": "2026-05-20T11:08:00Z", "status": "ok",  "lag_minutes": 4,   "fivetran_id": "sap_erp_pinnacle_prod",        "fivetran_url": "https://fivetran.com/dashboard/connectors/sap_erp_pinnacle_prod" },
+    { "name": "Dealertrack DMS",                 "source": "dealertrack_dms",   "rows_24h": 218400,    "last_sync": "2026-05-20T11:14:00Z", "status": "ok",  "lag_minutes": 6,   "fivetran_id": "dealertrack_pinnacle_dms",      "fivetran_url": "https://fivetran.com/dashboard/connectors/dealertrack_pinnacle_dms" },
+    { "name": "Manheim Used-Vehicle Feed",       "source": "manheim",           "rows_24h": 14820,     "last_sync": "2026-05-20T10:55:00Z", "status": "ok",  "lag_minutes": 12,  "fivetran_id": "manheim_cox_wholesale",         "fivetran_url": "https://fivetran.com/dashboard/connectors/manheim_cox_wholesale" },
+    { "name": "Connected-Car Telemetry Stream",  "source": "telemetry_kafka",   "rows_24h": 482000000, "last_sync": "2026-05-20T11:42:00Z", "status": "ok",  "lag_minutes": 0,   "fivetran_id": "kafka_telemetry_pinnacle",      "fivetran_url": "https://fivetran.com/dashboard/connectors/kafka_telemetry_pinnacle" },
+    { "name": "Salesforce Service Cloud",        "source": "salesforce_service","rows_24h": 38400,     "last_sync": "2026-05-20T11:11:00Z", "status": "ok",  "lag_minutes": 8,   "fivetran_id": "sfdc_service_cloud_pinnacle",   "fivetran_url": "https://fivetran.com/dashboard/connectors/sfdc_service_cloud_pinnacle" },
+    { "name": "J.D. Power Benchmarks",           "source": "jd_power",          "rows_24h": 2840,      "last_sync": "2026-05-20T03:00:00Z", "status": "ok",  "lag_minutes": 522, "fivetran_id": "jdpower_iqs_apeal_feed",        "fivetran_url": "https://fivetran.com/dashboard/connectors/jdpower_iqs_apeal_feed" }
   ],
   "layers": [
-    { "layer": "connector", "rows_in": 0,           "rows_out": 482755460, "tables": 6, "last_run": "2026-05-20", "status": "ok" },
+    { "layer": "connector", "rows_in": 0,           "rows_out": 482755460, "tables": 6,  "last_run": "2026-05-20", "status": "ok" },
     { "layer": "bronze",    "rows_in": 482755460,   "rows_out": 482755460, "tables": 14, "last_run": "2026-05-20", "status": "ok" },
     { "layer": "silver",    "rows_in": 482755460,   "rows_out": 612400,    "tables": 9,  "last_run": "2026-05-20", "status": "ok" },
     { "layer": "gold",      "rows_in": 612400,      "rows_out": 88240,     "tables": 7,  "last_run": "2026-05-20", "status": "ok" }

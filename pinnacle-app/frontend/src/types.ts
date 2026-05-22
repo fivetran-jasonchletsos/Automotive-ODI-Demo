@@ -225,6 +225,8 @@ export interface ConnectorStatus {
   last_sync: string;
   status: 'ok' | 'lag' | 'failed';
   lag_minutes: number;
+  fivetran_id?: string;
+  fivetran_url?: string;
 }
 
 export interface PipelineLayerStats {

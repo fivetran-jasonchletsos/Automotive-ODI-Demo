@@ -10,16 +10,15 @@ export default function ConnectedCarPage() {
   const ev = evQ.data;
 
   return (
-    <div className="bg-graphite-50 min-h-screen">
-      <div className="bg-graphite-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30 blueprint-grid" style={{ background: 'radial-gradient(circle at 80% 30%, #2563eb22, transparent 60%)' }} />
+    <div style={{ backgroundColor: '#f5f5f0' }} className="min-h-screen">
+      <div className="hero-bg-signal text-white relative overflow-hidden">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-signal-500 mb-2">Connected Car · Fleet Operations</div>
+          <div className="font-condensed text-[11px] tracking-[0.28em] text-signal-500 mb-2">Connected Car · Fleet Operations</div>
           <h1 className="font-display text-4xl sm:text-5xl tracking-wide">The agent that watches <span className="text-signal-500">1.2M vehicles</span>.</h1>
           <p className="mt-3 max-w-3xl text-graphite-300 leading-relaxed">
             Every Pinnacle vehicle on the road emits 400+ telemetry signals every three seconds.
             ODI lands the raw stream into <span className="font-mono text-signal-500">bronze.telemetry_events_raw</span>,
-            aggregates to <span className="font-mono text-signal-500">gold.fct_telemetry_health_signals</span>, and serves
+            aggregates to <span className="font-mono text-signal-500">fct_telemetry_health_signals</span>, and serves
             the same gold layer to BI, dbt tests, and the predictive-maintenance agent.
           </p>
         </div>
@@ -55,7 +54,7 @@ export default function ConnectedCarPage() {
             <div className="lg:col-span-2 spec-card">
               <div className="spec-card-header">
                 <div className="spec-card-title">Top 10 DTCs · 30-day trend</div>
-                <span className="layer-chip">gold.fct_telemetry_health_signals</span>
+                <span className="layer-chip">fct_telemetry_health_signals</span>
               </div>
               <div className="p-2 h-80">
                 <ResponsiveContainer width="100%" height="100%">
@@ -152,7 +151,7 @@ export default function ConnectedCarPage() {
                 <div className="spec-card">
                   <div className="spec-card-header">
                     <div className="spec-card-title">Charging Mix</div>
-                    <span className="layer-chip signal">gold.fct_telemetry_health_signals</span>
+                    <span className="layer-chip signal">fct_telemetry_health_signals</span>
                   </div>
                   <div className="p-5 space-y-3">
                     <ChargeBar label="Home L2"      pct={ev.charging_mix.home_l2_pct}     color="#15803d" />

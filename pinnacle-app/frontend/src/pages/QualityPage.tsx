@@ -7,15 +7,15 @@ export default function QualityPage() {
   const data = q.data;
 
   return (
-    <div className="bg-graphite-50 min-h-screen">
-      <div className="bg-graphite-900 text-white">
+    <div style={{ backgroundColor: '#f5f5f0' }} className="min-h-screen">
+      <div className="hero-bg text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-racing-500 mb-2">Quality · Warranty · J.D. Power</div>
+          <div className="font-condensed text-[11px] tracking-[0.28em] text-racing-500 mb-2">Quality · Warranty · J.D. Power</div>
           <h1 className="font-display text-4xl sm:text-5xl tracking-wide">Find the issue before the recall finds you.</h1>
           <p className="mt-3 max-w-3xl text-graphite-300 leading-relaxed">
             Warranty claims from Salesforce Service Cloud, joined to production date from SAP S/4HANA,
             joined to DTC velocity from the telemetry stream. Three sources, one VIN-keyed join in
-            <span className="font-mono text-racing-500"> gold.fct_warranty_claims</span>.
+            <span className="font-mono text-racing-500"> fct_warranty_claims</span>.
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function QualityPage() {
             <div className="lg:col-span-2 spec-card">
               <div className="spec-card-header">
                 <div className="spec-card-title">Warranty Claims by Part Family · 90d</div>
-                <span className="layer-chip">gold.fct_warranty_claims</span>
+                <span className="layer-chip">fct_warranty_claims</span>
               </div>
               <div className="p-2 h-96">
                 <ResponsiveContainer width="100%" height="100%">
@@ -80,7 +80,7 @@ export default function QualityPage() {
           <div className="mt-6 spec-card mb-12">
             <div className="spec-card-header">
               <div className="spec-card-title">Top 5 Issues · Root-cause status</div>
-              <span className="layer-chip racing">gold.fct_quality_recall_risk_signal</span>
+              <span className="layer-chip racing">fct_quality_recall_risk_signal</span>
             </div>
             <div className="divide-y divide-graphite-200">
               {data.top_issues.map((iss) => (

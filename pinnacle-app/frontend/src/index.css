@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Antonio:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Antonio:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Barlow+Condensed:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,45 +7,64 @@
 /*
  * Pinnacle Motors — precision-engineering automotive design system.
  *
- * Visual references: spec-sheet, blueprint, race-pit telemetry.
- * Palette: graphite #18181b, racing red #dc2626, off-white #fafafa,
- * signal blue #2563eb (connected-car).
- * Type: Inter (body), Antonio (display headers), JetBrains Mono (numerics).
+ * Visual references: motorsport telemetry readout, instrument cluster, pit-wall data panel,
+ * carbon-fibre dash, blueprint schematic.
+ * Palette: graphite #0f0f12 (deepened), racing red #dc2626, off-white #f5f5f0,
+ * signal blue #2563eb (connected-car), amber caution #d97706.
+ * Type: Antonio (display / instrument), Barlow Condensed (labels / eyebrows),
+ *        JetBrains Mono (readouts), Share Tech Mono (live numbers).
  */
 
+/* ─── Design tokens ─────────────────────────────────────────── */
 :root {
-  --graphite-950: #09090b;
-  --graphite-900: #18181b;
-  --graphite-800: #27272a;
-  --graphite-700: #3f3f46;
-  --graphite-600: #52525b;
-  --graphite-500: #71717a;
-  --graphite-400: #a1a1aa;
-  --graphite-300: #d4d4d8;
-  --graphite-200: #e4e4e7;
-  --graphite-100: #f4f4f5;
-  --graphite-50:  #fafafa;
+  /* Graphite scale — slightly cooler than pure zinc */
+  --graphite-950: #07070a;
+  --graphite-900: #0f0f12;
+  --graphite-800: #1a1a1f;
+  --graphite-700: #2e2e36;
+  --graphite-600: #47474f;
+  --graphite-500: #6b6b74;
+  --graphite-400: #9b9ba4;
+  --graphite-300: #c8c8d0;
+  --graphite-200: #e0e0e6;
+  --graphite-100: #f0f0f4;
+  --graphite-50:  #f8f8fb;
 
+  /* Racing red */
   --racing:       #dc2626;
   --racing-dim:   #991b1b;
+  --racing-bright:#f43f3f;
   --racing-bg:    #fef2f2;
 
+  /* Signal blue */
   --signal:       #2563eb;
   --signal-dim:   #1d4ed8;
   --signal-bg:    #eff6ff;
 
-  --paper:        #fafafa;
-  --hairline:     #e4e4e7;
-  --hairline-strong: #d4d4d8;
+  /* Amber / caution */
+  --caution:      #d97706;
+  --caution-bg:   #fffbeb;
 
+  /* Semantic */
   --bull:         #15803d;
   --bull-bg:      #f0fdf4;
   --bear:         #b91c1c;
   --bear-bg:      #fef2f2;
-  --caution:      #b45309;
-  --caution-bg:   #fffbeb;
+
+  --paper:        #f5f5f0;
+  --hairline:     #e0e0e6;
+  --hairline-strong: #c8c8d0;
+
+  /* Carbon fibre pattern */
+  --carbon-a: #1c1c22;
+  --carbon-b: #141418;
+
+  /* Glow colours */
+  --glow-racing: rgba(220, 38, 38, 0.35);
+  --glow-signal: rgba(37, 99, 235, 0.35);
 }
 
+/* ─── Base ──────────────────────────────────────────────────── */
 html, body {
   background-color: var(--paper);
   color: var(--graphite-900);
@@ -57,19 +76,203 @@ html, body {
 
 #root { min-height: 100vh; }
 
+/* ─── Typography ────────────────────────────────────────────── */
 .font-display {
   font-family: 'Antonio', 'Bebas Neue', Impact, sans-serif;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
+}
+
+/* Tighter condensed label style — eyebrows, column headers, chips */
+.font-condensed {
+  font-family: 'Barlow Condensed', 'Antonio', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Live-readout style — telemetry numbers */
+.font-readout {
+  font-family: 'Share Tech Mono', 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
 }
 
 .tabular { font-variant-numeric: tabular-nums; }
 
+/* ─── Hero / dark section backgrounds ──────────────────────── */
+/*
+ * Carbon-fibre weave for header/nav backgrounds.
+ * Two crossed diagonal patterns at 45deg simulate a plain weave.
+ */
+.carbon-bg {
+  background-color: var(--graphite-900);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 2px,
+      rgba(255,255,255,0.025) 2px,
+      rgba(255,255,255,0.025) 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 2px,
+      rgba(255,255,255,0.02) 2px,
+      rgba(255,255,255,0.02) 4px
+    );
+}
+
+/*
+ * Scan-line hero — used on page hero banners.
+ * Layered: radial spotlight + horizontal scan lines + subtle grid.
+ */
+.hero-bg {
+  background-color: var(--graphite-900);
+  background-image:
+    /* Scan lines */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255,255,255,0.018) 3px,
+      rgba(255,255,255,0.018) 4px
+    ),
+    /* Vertical grid */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 47px,
+      rgba(255,255,255,0.03) 47px,
+      rgba(255,255,255,0.03) 48px
+    ),
+    /* Spotlight */
+    radial-gradient(ellipse 70% 60% at 30% 50%, rgba(220,38,38,0.12) 0%, transparent 70%);
+}
+
+/* Signal-blue spotlight variant for connected-car hero */
+.hero-bg-signal {
+  background-color: var(--graphite-900);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255,255,255,0.018) 3px,
+      rgba(255,255,255,0.018) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 47px,
+      rgba(255,255,255,0.03) 47px,
+      rgba(255,255,255,0.03) 48px
+    ),
+    radial-gradient(ellipse 70% 60% at 70% 40%, rgba(37,99,235,0.15) 0%, transparent 65%);
+}
+
+/* ─── Precision rail (top of page) ─────────────────────────── */
+.precision-rail {
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--graphite-900) 0%,
+    var(--racing) 35%,
+    var(--racing-bright) 50%,
+    var(--racing) 65%,
+    var(--graphite-900) 100%
+  );
+  background-size: 200% 100%;
+  animation: rail-sweep 1.8s ease-out forwards;
+}
+
+@keyframes rail-sweep {
+  0%   { background-position: 100% 0; opacity: 0.4; }
+  60%  { background-position: 0% 0;   opacity: 1;   }
+  100% { background-position: 0% 0;   opacity: 1;   }
+}
+
+/* ─── KPI tiles — gauge-cluster aesthetic ───────────────────── */
+.kpi-tile {
+  background: #ffffff;
+  border: 1px solid var(--hairline);
+  border-radius: 0;           /* no softness — instrument panel is angular */
+  padding: 1rem 1.125rem 0.875rem;
+  position: relative;
+  overflow: hidden;
+  /* Inset shadow gives depth like a recessed gauge housing */
+  box-shadow: inset 0 -2px 0 0 rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.07);
+  animation: tile-appear 0.5s ease both;
+}
+
+/* Staggered entrance — applied via nth-child in Tailwind via inline delay */
+@keyframes tile-appear {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+.kpi-tile:nth-child(1) { animation-delay: 0.05s; }
+.kpi-tile:nth-child(2) { animation-delay: 0.10s; }
+.kpi-tile:nth-child(3) { animation-delay: 0.15s; }
+.kpi-tile:nth-child(4) { animation-delay: 0.20s; }
+.kpi-tile:nth-child(5) { animation-delay: 0.25s; }
+
+.kpi-tile-label {
+  font-family: 'Barlow Condensed', 'Antonio', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--graphite-500);
+}
+
+.kpi-tile-value {
+  font-family: 'Antonio', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--graphite-900);
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.kpi-tile-sub {
+  font-family: 'Share Tech Mono', 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  color: var(--graphite-500);
+  margin-top: 0.375rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* Top accent bar */
+.kpi-tile-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--racing);
+}
+.kpi-tile-accent.signal  { background: var(--signal); }
+.kpi-tile-accent.bull    { background: var(--bull); box-shadow: 0 0 6px rgba(21,128,61,0.4); }
+.kpi-tile-accent.caution { background: var(--caution); }
+.kpi-tile-accent.graphite{ background: var(--graphite-700); }
+
+/* Bottom readout rail — faint line + subtle glow for "live data" feel */
+.kpi-tile::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220,38,38,0.15), transparent);
+}
+
+/* ─── Spec card ──────────────────────────────────────────────── */
 .spec-card {
   background: #ffffff;
   border: 1px solid var(--hairline);
-  border-radius: 4px;
+  border-radius: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
+
 .spec-card-header {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--hairline);
@@ -77,74 +280,44 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-}
-.spec-card-title {
-  font-family: 'Antonio', sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--graphite-900);
+  /* Brushed metal — very subtle diagonal highlight */
+  background: linear-gradient(
+    160deg,
+    #ffffff 0%,
+    #fafafa 50%,
+    #f4f4f5 100%
+  );
 }
 
-.kpi-tile {
-  background: #ffffff;
-  border: 1px solid var(--hairline);
-  border-radius: 4px;
-  padding: 1rem 1.125rem;
-  position: relative;
-  overflow: hidden;
-}
-.kpi-tile-label {
-  font-size: 0.6875rem;
-  font-weight: 600;
+.spec-card-title {
+  font-family: 'Barlow Condensed', 'Antonio', sans-serif;
+  font-weight: 700;
+  font-size: 0.8125rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--graphite-500);
-}
-.kpi-tile-value {
-  font-family: 'Antonio', sans-serif;
-  font-size: 2.25rem;
-  font-weight: 600;
-  line-height: 1;
   color: var(--graphite-900);
-  font-variant-numeric: tabular-nums;
-  margin-top: 0.5rem;
 }
-.kpi-tile-sub {
-  font-size: 0.75rem;
-  color: var(--graphite-500);
-  margin-top: 0.375rem;
-  font-variant-numeric: tabular-nums;
-}
-.kpi-tile-accent {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--racing);
-}
-.kpi-tile-accent.signal { background: var(--signal); }
-.kpi-tile-accent.bull   { background: var(--bull); }
-.kpi-tile-accent.caution{ background: var(--caution); }
-.kpi-tile-accent.graphite{background: var(--graphite-900); }
 
+/* ─── Eyebrow labels ────────────────────────────────────────── */
 .eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   color: var(--racing);
 }
-.eyebrow-signal { color: var(--signal); }
-.eyebrow-graphite { color: var(--graphite-500); }
+.eyebrow-signal  { color: var(--signal); }
+.eyebrow-graphite{ color: var(--graphite-500); }
 
+/* ─── Layer chips ────────────────────────────────────────────── */
 .layer-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
   padding: 0.1875rem 0.5rem;
-  border-radius: 2px;
-  font-size: 0.625rem;
+  border-radius: 0;           /* angular — no soft rounding */
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -159,16 +332,19 @@ html, body {
 .layer-chip.racing { background: var(--racing-bg); border-color: #fecaca; color: var(--racing); }
 .layer-chip.signal { background: var(--signal-bg); border-color: #bfdbfe; color: var(--signal); }
 
+/* ─── Status pills ───────────────────────────────────────────── */
 .status-pill {
   display: inline-flex; align-items: center; gap: 0.375rem;
-  padding: 0.125rem 0.5rem; border-radius: 999px;
-  font-size: 0.6875rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.125rem 0.5rem; border-radius: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
   border: 1px solid transparent;
 }
 .status-pill::before {
-  content: ""; width: 0.4rem; height: 0.4rem;
+  content: ""; width: 0.35rem; height: 0.35rem;
   border-radius: 9999px; background: currentColor;
+  box-shadow: 0 0 4px currentColor;
 }
 .status-pill.bull    { background: var(--bull-bg);    color: var(--bull);    border-color: #bbf7d0; }
 .status-pill.bear    { background: var(--bear-bg);    color: var(--bear);    border-color: #fecaca; }
@@ -176,19 +352,50 @@ html, body {
 .status-pill.neutral { background: var(--graphite-100);color: var(--graphite-600); border-color: var(--hairline); }
 .status-pill.signal  { background: var(--signal-bg);  color: var(--signal);  border-color: #bfdbfe; }
 
+/* ─── Blueprint grid (architecture page) ────────────────────── */
 .blueprint-grid {
-  background-color: #ffffff;
+  background-color: #fafafa;
   background-image:
-    linear-gradient(to right, rgba(24,24,27,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(24,24,27,0.04) 1px, transparent 1px);
-  background-size: 24px 24px;
+    linear-gradient(to right, rgba(24,24,27,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24,24,27,0.06) 1px, transparent 1px),
+    /* Major lines every 120px */
+    linear-gradient(to right, rgba(24,24,27,0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24,24,27,0.10) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
 }
 
-.precision-rail {
-  height: 3px;
-  background: linear-gradient(90deg, var(--graphite-900) 0%, var(--racing) 50%, var(--graphite-900) 100%);
+/* ─── Spec table ─────────────────────────────────────────────── */
+table.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+table.spec-table th {
+  text-align: left;
+  font-family: 'Barlow Condensed', 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--graphite-500);
+  padding: 0.625rem 0.75rem;
+  border-bottom: 2px solid var(--hairline-strong);
+  background: var(--graphite-50);
+}
+table.spec-table td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--hairline);
+  vertical-align: top;
+}
+table.spec-table tr:hover td {
+  background: #f5f5f0;
+  /* Left-edge glow on hover — telematics readout row highlight */
+}
+table.spec-table tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 var(--racing);
 }
 
+/* ─── Data row ───────────────────────────────────────────────── */
 .data-row {
   display: grid;
   align-items: center;
@@ -199,33 +406,11 @@ html, body {
 .data-row:last-child { border-bottom: 0; }
 .data-row:hover { background: var(--graphite-50); }
 
-table.spec-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-}
-table.spec-table th {
-  text-align: left;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--graphite-500);
-  padding: 0.625rem 0.75rem;
-  border-bottom: 1px solid var(--hairline-strong);
-  background: var(--graphite-50);
-}
-table.spec-table td {
-  padding: 0.625rem 0.75rem;
-  border-bottom: 1px solid var(--hairline);
-  vertical-align: top;
-}
-table.spec-table tr:hover td { background: var(--graphite-50); }
-
-::-webkit-scrollbar { width: 8px; height: 8px; }
+/* ─── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--graphite-100); }
-::-webkit-scrollbar-thumb { background: var(--graphite-400); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--graphite-400); border-radius: 0; }
 ::-webkit-scrollbar-thumb:hover { background: var(--graphite-600); }
 
-*:focus-visible { outline: 2px solid var(--racing); outline-offset: 2px; border-radius: 2px; }
+/* ─── Focus ──────────────────────────────────────────────────── */
+*:focus-visible { outline: 2px solid var(--racing); outline-offset: 2px; border-radius: 0; }

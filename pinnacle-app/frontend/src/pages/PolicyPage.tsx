@@ -1,9 +1,9 @@
 export default function PolicyPage() {
   return (
-    <div className="bg-graphite-50 min-h-screen">
-      <div className="bg-graphite-900 text-white">
+    <div style={{ backgroundColor: '#f5f5f0' }} className="min-h-screen">
+      <div className="hero-bg text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-racing-500 mb-2">Why ODI · Automotive Data Reality</div>
+          <div className="font-condensed text-[11px] tracking-[0.28em] text-racing-500 mb-2">Why ODI · Automotive Data Reality</div>
           <h1 className="font-display text-4xl sm:text-5xl tracking-wide">Three IT estates that have never spoken to each other.</h1>
           <p className="mt-3 max-w-3xl text-graphite-300 leading-relaxed">
             The automotive industry doesn't have a data problem — it has a data <em>seam</em> problem.

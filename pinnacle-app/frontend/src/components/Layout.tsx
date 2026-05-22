@@ -42,7 +42,7 @@ export default function Layout() {
     <div className="min-h-full flex flex-col bg-[var(--paper)]">
       <div className="precision-rail" />
 
-      <header className="bg-graphite-900 text-white sticky top-0 z-30 border-b border-graphite-800">
+      <header className="carbon-bg text-white sticky top-0 z-30 border-b border-graphite-800">
         <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
           <div className="flex h-16 sm:h-20 items-center justify-between gap-2 sm:gap-4">
             <Link to="/" className="flex items-center gap-3 shrink-0 min-w-0 group">
@@ -75,7 +75,7 @@ export default function Layout() {
                     <>
                       {label}
                       {isActive && (
-                        <span className="absolute left-3 right-3 -bottom-[1px] h-[2px] bg-racing-600" />
+                        <span className="absolute left-3 right-3 -bottom-[1px] h-[2px] bg-racing-500" style={{ boxShadow: '0 0 6px rgba(244,63,63,0.7)' }} />
                       )}
                     </>
                   )}
@@ -127,7 +127,7 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-graphite-200 bg-graphite-900 text-white/80 mt-16">
+      <footer className="border-t border-graphite-200 carbon-bg text-white/80 mt-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
           <div>
             <div className="flex items-center gap-2 mb-3">

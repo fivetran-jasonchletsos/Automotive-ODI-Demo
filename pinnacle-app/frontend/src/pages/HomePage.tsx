@@ -19,13 +19,13 @@ export default function HomePage() {
   const topDealers = [...dealers].sort((a, b) => b.csi - a.csi).slice(0, 8);
 
   return (
-    <div className="bg-graphite-50">
+    <div style={{ backgroundColor: '#f5f5f0' }}>
       {/* Hero */}
-      <section className="bg-graphite-900 text-white">
+      <section className="hero-bg text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
             <div className="lg:col-span-7">
-              <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-racing-500 mb-3">
+              <div className="font-condensed text-[11px] tracking-[0.28em] text-racing-500 mb-3">
                 Chief Data Officer · ODI Operations Console
               </div>
               <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl tracking-wide leading-[0.95]">
@@ -82,7 +82,7 @@ export default function HomePage() {
                 <div className="spec-card-title">Network Footprint</div>
                 <div className="text-[11px] text-graphite-500 mt-0.5 font-mono">4 plants · 280 dealers · top 8 by CSI</div>
               </div>
-              <span className="layer-chip racing">gold.dim_dealers</span>
+              <span className="layer-chip racing">dim_dealers</span>
             </div>
             <div className="p-2">
               <USMap
@@ -97,7 +97,7 @@ export default function HomePage() {
           <div className="spec-card">
             <div className="spec-card-header">
               <div className="spec-card-title">Top 3 Quality Watch</div>
-              <span className="layer-chip">gold.fct_warranty_claims</span>
+              <span className="layer-chip">fct_warranty_claims</span>
             </div>
             <div className="divide-y divide-graphite-200">
               {topIssues.map((iss) => (
@@ -202,7 +202,7 @@ export default function HomePage() {
           <div className="spec-card-header">
             <div>
               <div className="spec-card-title">Plant Production · Today</div>
-              <div className="text-[11px] text-graphite-500 mt-0.5 font-mono">gold.fct_production_daily · {productionQ.data?.daily_pace.at(-1)?.units ?? '—'} units yesterday</div>
+              <div className="text-[11px] text-graphite-500 mt-0.5 font-mono">fct_production_daily · {productionQ.data?.daily_pace.at(-1)?.units ?? '—'} units yesterday</div>
             </div>
             <span className="layer-chip">{plants.length} plants</span>
           </div>

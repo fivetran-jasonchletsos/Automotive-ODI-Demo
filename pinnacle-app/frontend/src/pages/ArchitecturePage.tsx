@@ -8,10 +8,10 @@ export default function ArchitecturePage() {
   const layers = ['bronze', 'silver', 'gold'] as const;
 
   return (
-    <div className="bg-graphite-50 min-h-screen">
-      <div className="bg-graphite-900 text-white">
+    <div style={{ backgroundColor: '#f5f5f0' }} className="min-h-screen">
+      <div className="hero-bg text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="text-[11px] font-bold uppercase tracking-[0.22em] text-racing-500 mb-2">ODI Architecture · Reference Diagram</div>
+          <div className="font-condensed text-[11px] tracking-[0.28em] text-racing-500 mb-2">ODI Architecture · Reference Diagram</div>
           <h1 className="font-display text-4xl sm:text-5xl tracking-wide">Six sources. One Iceberg lake. Any engine.</h1>
           <p className="mt-3 max-w-3xl text-graphite-300 leading-relaxed">
             Pinnacle Motors' ODI stack: managed connectors landing into Apache Iceberg on S3, governed
