@@ -7,6 +7,7 @@ const NAV_ITEMS: [string, string][] = [
   ['/dealers', 'Dealers'],
   ['/connected-car', 'Connected Car'],
   ['/quality', 'Quality'],
+  ['/related', 'Related'],
   ['/architecture', 'Architecture'],
   ['/pipeline', 'Pipeline'],
   ['/policy', 'Why ODI'],

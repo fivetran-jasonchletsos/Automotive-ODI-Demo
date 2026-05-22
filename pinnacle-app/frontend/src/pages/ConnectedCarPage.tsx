@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { api, formatNumber, formatNumberShort, formatPercent } from '../api/queries';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line, Legend } from 'recharts';
+import RelatedVehiclesPanel from '../components/RelatedVehiclesPanel';
+import { VEHICLES } from '../lib/vehicles';
 
 export default function ConnectedCarPage() {
   const ccQ = useQuery({ queryKey: ['connected'], queryFn: api.getConnectedCar });
@@ -211,6 +213,28 @@ export default function ConnectedCarPage() {
               </div>
             </>
           )}
+
+          {/* Related vehicles panels — one per model with active DTC signals */}
+          <div className="mt-10 mb-4">
+            <div className="eyebrow-signal eyebrow">Model Similarity · Related Fleet Analysis</div>
+            <h2 className="font-display text-3xl tracking-wide text-graphite-900">
+              Related Vehicles by Telematics Signature
+            </h2>
+            <p className="text-sm text-graphite-700 mt-1 max-w-3xl">
+              Models sharing platform architecture, powertrain, or DTC signature — enabling cross-model
+              fleet monitoring and proactive recall-signal correlation.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+            {VEHICLES.map((v) => (
+              <div key={v.id}>
+                <div className="text-[10px] font-condensed uppercase tracking-[0.22em] text-graphite-500 mb-2 pl-1">
+                  {v.name}
+                </div>
+                <RelatedVehiclesPanel vehicle={v} limit={4} />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -10,6 +10,7 @@ import ConnectedCarPage from './pages/ConnectedCarPage';
 import QualityPage from './pages/QualityPage';
 import PolicyPage from './pages/PolicyPage';
 import NotFoundPage from './pages/NotFoundPage';
+import RelatedVehiclesPage from './pages/RelatedVehiclesPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="/architecture" element={<ArchitecturePage />} />
             <Route path="/pipeline" element={<PipelinePage />} />
             <Route path="/policy" element={<PolicyPage />} />
+            <Route path="/related" element={<RelatedVehiclesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
