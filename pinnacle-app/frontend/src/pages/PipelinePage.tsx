@@ -1,6 +1,18 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 import { api, formatNumber } from '../api/queries';
+
+// Real Fivetran connector IDs for the Pinnacle Motors demo.
+// Deep-link pattern: https://fivetran.com/dashboard/connections/{id}/status
+const FIVETRAN_CONNECTOR_IDS: Record<string, string> = {
+  'SAP S/4HANA — OEM ERP':       'arrest_unfolded',
+  'Dealertrack DMS':              'hotter_hurling',
+  'Manheim Used-Vehicle Feed':    'kiss_vain',
+  'Connected-Car Telemetry Stream': 'goodbye_unsalted',
+  'Salesforce Service Cloud':     'recorded_udder',
+  'J.D. Power Benchmarks':        'validity_creating',
+};
 
 export default function PipelinePage() {
   const pipelineQ = useQuery({ queryKey: ['pipeline'], queryFn: api.getPipeline });
@@ -85,9 +97,9 @@ export default function PipelinePage() {
                             : <span className="status-pill bear">failed</span>}
                         </td>
                         <td onClick={(e) => e.stopPropagation()}>
-                          {c.fivetran_url && (
+                          {(c.fivetran_id ?? FIVETRAN_CONNECTOR_IDS[c.name]) && (
                             <a
-                              href={c.fivetran_url}
+                              href={`https://fivetran.com/dashboard/connections/${c.fivetran_id ?? FIVETRAN_CONNECTOR_IDS[c.name]}/status`}
                               target="_blank"
                               rel="noreferrer"
                               className="inline-flex items-center gap-1 px-2 py-1 text-[10px] font-condensed tracking-wider border border-racing-600/40 text-racing-600 hover:bg-racing-600 hover:text-white transition-colors whitespace-nowrap"
@@ -108,20 +120,48 @@ export default function PipelinePage() {
           </div>
 
           {simFailure && (
-            <div className="spec-card border-l-4 border-l-racing-600 p-5 mb-12">
+            <div className="spec-card border-l-4 border-l-racing-600 p-5">
               <div className="eyebrow mb-1">Simulated failure</div>
               <div className="font-display text-xl tracking-wide">Downstream impact of "{simFailure}" outage</div>
               <ul className="mt-3 text-sm text-graphite-700 space-y-1 list-disc list-inside">
                 <li>Bronze table partition stalls — Iceberg keeps last good snapshot (time-travel).</li>
                 <li>dbt silver models still run on prior partition; freshness test fires.</li>
                 <li>Downstream marts (dim_dealers / fct_warranty_claims) remain queryable; freshness pill flips to "stale".</li>
-                <li>Snowflake dashboards and the PdM agent both see the same staleness signal — single source of truth.</li>
+                <li>Snowflake dashboards and the reliability agent both see the same staleness signal — single source of truth.</li>
               </ul>
               <button onClick={() => setSimFailure(null)} className="mt-4 inline-flex px-3 py-1.5 bg-graphite-900 text-white font-display tracking-wider text-xs uppercase">
                 Reset
               </button>
             </div>
           )}
+
+          {/* dbt-wizard callout */}
+          <div className="spec-card border-l-4 border-l-racing-600 p-5 mb-12">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <div className="eyebrow mb-1">dbt-wizard · build-time AI</div>
+                <div className="font-display text-xl tracking-wide" style={{ color: 'var(--graphite-900)' }}>
+                  Missing gold model? Author one in 91 seconds.
+                </div>
+                <p className="mt-2 text-sm text-graphite-600 leading-relaxed max-w-2xl">
+                  When the VP of Connected Vehicle Ops asks why Volt EV thermal flags spiked 3.1x in
+                  cold-climate markets, there is no gold table to answer it. dbt-wizard's four sub-agents
+                  surface the upstreams, author the SQL, write the tests, and materialize the model —
+                  before the Reliability Review. $9M warranty exposure. 91 seconds.
+                </p>
+              </div>
+              <Link
+                to="/wizard-scenario"
+                className="inline-flex items-center gap-2 px-5 py-3 text-white font-display tracking-wider text-sm uppercase whitespace-nowrap hover:opacity-95 transition-opacity shrink-0"
+                style={{ background: 'var(--racing)' }}
+              >
+                See the scenario
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </div>

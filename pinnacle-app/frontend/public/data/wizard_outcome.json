@@ -1,0 +1,104 @@
+{
+  "materialized_model": "gold.fct_thermal_flags_by_powertrain_climate_week",
+  "row_count": 312,
+  "tests_passed": 9,
+  "tests_written": "6 column-level + 1 combination + 1 not-null on thermal_event_rate + 1 accepted-values on climate_zone",
+  "build_seconds": 91,
+  "before": {
+    "nodes": [
+      { "id": "thermal_events",  "name": "silver.int_telemetry_thermal_events", "layer": "intermediate" },
+      { "id": "vehicle_spine",   "name": "silver.int_vehicle_spine",           "layer": "intermediate" },
+      { "id": "climate_map",     "name": "silver.int_climate_zone_map",        "layer": "intermediate" },
+      { "id": "ota_log",         "name": "silver.int_ota_deployment_log",      "layer": "intermediate" },
+      { "id": "gap",             "name": "gold.fct_thermal_flags_by_powertrain_climate_week", "layer": "gap", "built": false }
+    ],
+    "edges": [
+      { "from": "thermal_events", "to": "gap" },
+      { "from": "vehicle_spine",  "to": "gap" },
+      { "from": "climate_map",    "to": "gap" },
+      { "from": "ota_log",        "to": "gap" }
+    ]
+  },
+  "after": {
+    "nodes": [
+      { "id": "thermal_events",  "name": "silver.int_telemetry_thermal_events", "layer": "intermediate" },
+      { "id": "vehicle_spine",   "name": "silver.int_vehicle_spine",           "layer": "intermediate" },
+      { "id": "climate_map",     "name": "silver.int_climate_zone_map",        "layer": "intermediate" },
+      { "id": "ota_log",         "name": "silver.int_ota_deployment_log",      "layer": "intermediate" },
+      { "id": "new_gold",        "name": "gold.fct_thermal_flags_by_powertrain_climate_week", "layer": "gold", "built": true, "new": true },
+      { "id": "warranty_dash",   "name": "Warranty Analytics Dashboard",       "layer": "consumer" },
+      { "id": "recall_feed",     "name": "Recall Risk Model",                  "layer": "consumer" }
+    ],
+    "edges": [
+      { "from": "thermal_events", "to": "new_gold" },
+      { "from": "vehicle_spine",  "to": "new_gold" },
+      { "from": "climate_map",    "to": "new_gold" },
+      { "from": "ota_log",        "to": "new_gold" },
+      { "from": "new_gold",       "to": "warranty_dash" },
+      { "from": "new_gold",       "to": "recall_feed" }
+    ]
+  },
+  "root_cause": {
+    "headline": "OTA 2.1 soft-precondition profile over-warms cells below 14 F — a software regression, not hardware failure",
+    "detail": "All 312 Volt EV cold-climate thermal events in week 20 share a single signature: active_ota_version = '2.1', preconditioning_mode = 'soft', ambient temp below 14 F. The v2.1 update pushed two weeks ago introduced an aggressive soft-precondition profile that over-warms battery cells when ambient temperature drops below 14 F. Warm-climate markets are unaffected because ambient temps never trigger the threshold. The regression is in the soft-precondition algorithm — an OTA rollback resolves the issue; no recall is warranted.",
+    "affected_cohort": "Volt EV cold-climate fleet with OTA v2.1, ambient temp below 14 F",
+    "fallout_count": 312,
+    "total_reviewed": 312
+  },
+  "without_wizard": {
+    "label": "Without dbt-wizard",
+    "summary": "Question enters the analytics backlog. Reliability review runs without the root-cause answer.",
+    "metrics": [
+      { "label": "Time to model",              "value": "3 to 5 days" },
+      { "label": "Engineer hours",             "value": "10 to 16h" },
+      { "label": "Tests written",              "value": "ad-hoc" },
+      { "label": "Lineage entries",            "value": "manual" },
+      { "label": "Documentation",              "value": "PR-time only" },
+      { "label": "Reliability Review status",  "value": "no answer" }
+    ],
+    "narrative": [
+      "VP Connected Vehicle Ops files the request. It enters the analytics backlog at priority A.",
+      "Data engineer scopes the work Monday morning — three days after the reliability review.",
+      "Engineer writes SQL from scratch, joining four silver tables by hand.",
+      "Tests, YAML, and contract get bolted on at PR time.",
+      "Reliability team cannot isolate whether this is hardware or software before the review.",
+      "Warranty team escalates a potential recall — $9M exposure stays open."
+    ]
+  },
+  "with_wizard": {
+    "label": "With dbt-wizard",
+    "summary": "Four sub-agents surface the upstreams, author the SQL, write the tests, and materialize the asset in 91 seconds.",
+    "metrics": [
+      { "label": "Time to model",              "value": "91 seconds" },
+      { "label": "Engineer hours",             "value": "0.0h authored" },
+      { "label": "Tests written",              "value": "6 column + 1 combination + 2 additional" },
+      { "label": "Lineage entries",            "value": "auto, 4 upstream" },
+      { "label": "Documentation",              "value": "in YAML on materialize" },
+      { "label": "Reliability Review status",  "value": "root cause in hand" }
+    ],
+    "narrative": [
+      "Explorer runs status and search. Returns the four silver upstream candidates.",
+      "Summary runs describe and lineage. Confirms join path and names the new grain.",
+      "Worker runs dbt_show on a 21-day slice. Validates the proposed grain.",
+      "Worker authors fct_thermal_flags_by_powertrain_climate_week.sql with CTEs and final SELECT.",
+      "Verification writes the YAML — description, schema contract, 9 tests, ownership.",
+      "Worker materializes the table to Iceberg. Verification confirms downstream lineage.",
+      "VP presents root-cause finding: OTA rollback, not recall. $9M exposure closed."
+    ]
+  },
+  "governance": [
+    { "label": "Tests written",           "value": "6 column-level + 1 combination + 2 accepted-values" },
+    { "label": "Schema contract",         "value": "enforced on materialize" },
+    { "label": "Lineage upstreams",       "value": "4 declared, 4 validated" },
+    { "label": "Documentation",           "value": "auto-written in YAML" },
+    { "label": "Ownership",              "value": "connected_vehicle_reliability" },
+    { "label": "Tag",                     "value": "ai_built · warranty" },
+    { "label": "Iceberg table format",    "value": "v2 · Parquet · ZSTD" },
+    { "label": "Open Catalog registration","value": "complete" }
+  ],
+  "hero": {
+    "label": "Root cause identified before the Reliability Review — OTA rollback, not a recall",
+    "value": "91 seconds",
+    "note": "From VP question to materialized Iceberg gold table — versioned, tested, documented, lineage-tracked. The connected vehicle team now knows OTA v2.1's soft-precondition profile is the regression. An OTA rollback closes the incident. The $9M warranty-and-recall exposure is resolved without a single vehicle leaving the road."
+  }
+}

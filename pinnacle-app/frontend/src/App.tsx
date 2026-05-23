@@ -11,6 +11,9 @@ import QualityPage from './pages/QualityPage';
 import PolicyPage from './pages/PolicyPage';
 import NotFoundPage from './pages/NotFoundPage';
 import RelatedVehiclesPage from './pages/RelatedVehiclesPage';
+import WizardScenarioPage from './pages/WizardScenarioPage';
+import WizardLivePage from './pages/WizardLivePage';
+import WizardOutcomePage from './pages/WizardOutcomePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +36,9 @@ export default function App() {
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/related" element={<RelatedVehiclesPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/wizard-scenario" element={<WizardScenarioPage />} />
+            <Route path="/wizard-live" element={<WizardLivePage />} />
+            <Route path="/wizard-outcome" element={<WizardOutcomePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

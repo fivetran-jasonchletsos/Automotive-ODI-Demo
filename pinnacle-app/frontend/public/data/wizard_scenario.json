@@ -1,0 +1,47 @@
+{
+  "company": "Pinnacle Motors",
+  "request_id": "BLD-2026-05-23-0041",
+  "requested_by": "VP, Connected Vehicle Ops",
+  "requested_at": "2026-05-23T06:14:00-06:00",
+  "timezone_label": "Friday 06:14 MT",
+  "question": "Why did Volt EV battery thermal-event flags spike 3.1x in cold-climate markets last week, while warm markets held?",
+  "metric_label": "Thermal-event flags by powertrain and climate zone, weekly",
+  "metric_code": "gold.fct_thermal_flags_by_powertrain_climate_week",
+  "sop_meeting_at": "2026-05-23T20:00:00-06:00",
+  "sop_meeting_label": "Friday 20:00 MT · Reliability Review",
+  "target_schema": "gold",
+  "target_model": "fct_thermal_flags_by_powertrain_climate_week",
+  "target_grain": "one row per (powertrain_type, climate_zone, iso_week)",
+  "prior_crisis_id": "INC-2026-05-16-0018",
+  "fleet_line": "Volt EV",
+  "service_line": "Connected Vehicle",
+  "at_risk": "$9M warranty + recall exposure",
+  "upstream_models": [
+    {
+      "model": "silver.int_telemetry_thermal_events",
+      "layer": "intermediate",
+      "grain": "vehicle_id · event_timestamp",
+      "description": "Parsed thermal-event signals from the Kafka telemetry stream. Includes battery_temp_c, thermal_event_flag, preconditioning_mode, and ota_firmware_version keyed on vehicle_id + event_timestamp."
+    },
+    {
+      "model": "silver.int_vehicle_spine",
+      "layer": "intermediate",
+      "grain": "vehicle_id (SCD-2)",
+      "description": "Vehicle master joining SAP production records with Dealertrack registration data. Carries powertrain_type, model_year, ota_channel, and delivery_region."
+    },
+    {
+      "model": "silver.int_climate_zone_map",
+      "layer": "intermediate",
+      "grain": "zip_code",
+      "description": "Zip-to-climate-zone lookup derived from NOAA historical averages. Classifies each zip as cold (avg Jan temp below 20 F), temperate, or warm. Joins to int_vehicle_spine via dealer_zip."
+    },
+    {
+      "model": "silver.int_ota_deployment_log",
+      "layer": "intermediate",
+      "grain": "vehicle_id · ota_version · deployed_at",
+      "description": "OTA push history from the Connected Vehicle platform. Includes firmware_version, rollout_start_at, rollout_pct, and affected_powertrain. Used to correlate flag spikes with specific OTA versions."
+    }
+  ],
+  "manual_time_days": "3 to 5 days",
+  "build_room_seconds": 91
+}

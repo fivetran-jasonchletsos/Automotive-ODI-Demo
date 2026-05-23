@@ -48,7 +48,26 @@ export default function HomePage() {
                 <Link to="/architecture" className="px-4 py-2.5 border border-white/20 hover:bg-white/10 text-white font-display tracking-wider text-sm uppercase">
                   ODI Architecture →
                 </Link>
+                <Link
+                  to="/wizard-scenario"
+                  className="px-4 py-2.5 border border-racing-600/60 hover:bg-racing-600/20 text-racing-400 font-display tracking-wider text-sm uppercase inline-flex items-center gap-2"
+                >
+                  <span
+                    style={{
+                      display: 'inline-block', width: 7, height: 7, borderRadius: 999,
+                      background: '#dc2626',
+                      animation: 'signal-pulse 1.8s ease-in-out infinite',
+                    }}
+                  />
+                  dbt-wizard · $9M scenario
+                </Link>
               </div>
+              <style>{`
+                @keyframes signal-pulse {
+                  0%, 100% { opacity: 1; }
+                  50% { opacity: 0.28; }
+                }
+              `}</style>
             </div>
             <div className="lg:col-span-5">
               <div className="grid grid-cols-2 gap-3 font-mono">

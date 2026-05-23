@@ -10,6 +10,7 @@ const NAV_ITEMS: [string, string][] = [
   ['/related', 'Related'],
   ['/architecture', 'Architecture'],
   ['/pipeline', 'Pipeline'],
+  ['/wizard-scenario', 'dbt-wizard'],
   ['/policy', 'Why ODI'],
   ['/about', 'About'],
 ];
@@ -158,8 +159,29 @@ export default function Layout() {
           </div>
         </div>
         <div className="border-t border-graphite-800">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-[11px] text-white/50 flex flex-col sm:flex-row gap-1 sm:items-center sm:justify-between">
-            <div>© 2026 Pinnacle Motors ODI Demo · Fivetran Open Data Infrastructure</div>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-[11px] text-white/50 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span>© 2026 Pinnacle Motors ODI Demo · Fivetran Open Data Infrastructure</span>
+              <Link
+                to="/wizard-scenario"
+                className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-condensed tracking-wider border transition-colors hover:bg-racing-600/20"
+                style={{ borderColor: 'rgba(220,38,38,0.4)', color: 'rgba(220,38,38,0.75)' }}
+              >
+                dbt-wizard demo
+              </Link>
+              <a
+                href="/Pinnacle-Motors-3min-Demo-Runbook.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-condensed tracking-wider border transition-colors hover:bg-graphite-700/40"
+                style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.5)' }}
+              >
+                3-min runbook
+                <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+                  <path d="M2 10L10 2M6 2h4v4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
             <div className="font-mono">Snapshot {snapshotAt ? new Date(snapshotAt).toLocaleString() : '—'}</div>
           </div>
         </div>
