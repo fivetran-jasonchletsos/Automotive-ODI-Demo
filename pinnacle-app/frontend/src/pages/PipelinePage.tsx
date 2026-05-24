@@ -25,11 +25,14 @@ export default function PipelinePage() {
       <div className="hero-bg text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
           <div className="font-condensed text-[11px] tracking-[0.28em] text-racing-500 mb-2">Pipeline · Connector Status</div>
-          <h1 className="font-display text-4xl sm:text-5xl tracking-wide">Six connectors. Four dbt layers. One snapshot.</h1>
+          <h1 className="font-display text-4xl sm:text-5xl tracking-wide">[source] → Iceberg → multi-engine, end-to-end</h1>
           <p className="mt-3 max-w-3xl text-graphite-300 leading-relaxed">
-            Fivetran-managed connectors land raw data into <span className="font-mono text-racing-500">bronze</span> on
-            Apache Iceberg. dbt builds <span className="font-mono text-racing-500">silver</span> staging models and
-            <span className="font-mono text-racing-500"> gold</span> semantic marts on the same files.
+            Fivetran lands every CDC row into <span className="font-mono text-racing-500">Iceberg (MDLS)</span> on S3 in open
+            Apache Iceberg format — one copy of the bytes. Snowflake, Athena, and Trino read the same
+            Iceberg bytes via external catalogs (no copies, no extracts). Fivetran Transformations triggers
+            dbt Labs the moment the source sync finishes — <span className="font-mono text-racing-500">bronze</span> →
+            <span className="font-mono text-racing-500"> silver</span> →
+            <span className="font-mono text-racing-500"> gold</span> stays in Iceberg.
           </p>
         </div>
       </div>

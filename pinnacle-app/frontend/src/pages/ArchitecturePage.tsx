@@ -2,7 +2,7 @@
 //
 // Ported from Clarity Health's ArchitecturePage to give Pinnacle the same
 // medallion / multi-engine surface. Automotive flavour: OEM ERP (SQL
-// Server CDC) + plant production (Oracle LogMiner) + CAN-bus telematics
+// Server CDC) + plant production (Oracle Binary Log Reader) + CAN-bus telematics
 // (1.2M connected vehicles) + NHTSA recall feed. Snowflake is the primary
 // engine; Athena/DuckDB/Trino/Spark stay listed as the same open-lake reads.
 
@@ -12,7 +12,7 @@ import { api, formatBytes, formatNumber } from '../api/queries';
 
 const AUTO_SOURCES: SourceNode[] = [
   { id: 'dms',   label: 'Dealer DMS',         sub: 'SQL Server log-CDC',   logo: 'sqlserver', freshness: '43s lag',  status: 'healthy' },
-  { id: 'prod',  label: 'Plant Production',   sub: 'Oracle LogMiner',      logo: 'oracle',    freshness: '2 min lag', status: 'healthy' },
+  { id: 'prod',  label: 'Plant Production',   sub: 'Oracle Binary Log Reader', logo: 'oracle', freshness: '2 min lag', status: 'healthy' },
   { id: 'can',   label: 'CAN-bus Telematics', sub: 'Connected-car stream', logo: 'hl7',       freshness: 'live',      status: 'healthy', streaming: true },
   { id: 'nhtsa', label: 'NHTSA Recall Feed',  sub: 'Daily federal pull',   logo: 'cms',       freshness: '1d lag',   status: 'healthy' },
 ];
@@ -52,10 +52,12 @@ export default function ArchitecturePage() {
       <div className="hero-bg text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
           <div className="font-condensed text-[11px] tracking-[0.28em] text-racing-500 mb-2">ODI Architecture · Reference Diagram</div>
-          <h1 className="font-display text-4xl sm:text-5xl tracking-wide">Four sources. One Iceberg lake. Any engine.</h1>
+          <h1 className="font-display text-4xl sm:text-5xl tracking-wide">[Source] → Fivetran → Iceberg (MDLS) → Snowflake / Athena / Trino → dbt Labs → React</h1>
           <p className="mt-3 max-w-3xl text-graphite-300 leading-relaxed">
-            Pinnacle Motors' ODI stack: managed connectors landing into Apache Iceberg on S3, governed
-            by Glue catalog, transformed by dbt, queried by Snowflake — all without re-ingesting data.
+            One copy of the bytes. Fivetran lands every CDC row into Iceberg (MDLS) on S3 in open
+            Apache Iceberg format. Snowflake, Athena, and Trino read the same Iceberg bytes via
+            external catalogs — no copies, no extracts. Fivetran Transformations triggers dbt Labs
+            the moment the source sync finishes; bronze → silver → gold stays in Iceberg.
           </p>
         </div>
       </div>
@@ -64,7 +66,7 @@ export default function ArchitecturePage() {
         {/* Data Flow — alive medallion */}
         <div className="spec-card overflow-hidden">
           <div className="spec-card-header">
-            <div className="spec-card-title">Data Flow · From four open sources to one governed gold layer</div>
+            <div className="spec-card-title">Data Flow · Open lake, multi-engine, end-to-end</div>
             <span className="layer-chip">ODI v1</span>
           </div>
           <div className="p-6 lg:p-8 bg-white">
@@ -76,7 +78,7 @@ export default function ArchitecturePage() {
               engines={AUTO_ENGINES}
               roles={AUTO_ROLES}
               accent="#dc2626"
-              enginesCaption="All five read the same Iceberg tables — no copies, no rebuilds per tool."
+              enginesCaption="Snowflake / Athena / Trino — external Iceberg reads. Same bytes, no copies, no extracts."
             />
           </div>
         </div>

@@ -163,7 +163,7 @@ export function AliveMedallion({
           <footer className="am-lakehouse-footer">
             <span className="am-dbt-chip">
               <VendorMark kind="dbt" size={14} />
-              dbt on Snowflake compute · commits Silver + Gold as Iceberg snapshots
+              dbt Labs · triggered by Fivetran Transformations · commits Silver + Gold as Iceberg snapshots
             </span>
             <span className="am-lake-truth">One set of files · ACID · time-travel</span>
           </footer>

@@ -248,7 +248,7 @@ export default function Layout() {
             <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-racing-500 mb-2">Data Pipeline</div>
             <p className="leading-relaxed text-white/70">
               SAP S/4HANA · Dealertrack DMS · Manheim · Telemetry stream · Salesforce Service · J.D. Power
-              → Fivetran connectors → S3 + Apache Iceberg → dbt (bronze / silver / gold) → Snowflake
+              → Fivetran → Iceberg (MDLS) on S3 → Snowflake / Athena / Trino → dbt Labs (Fivetran-triggered) → React
             </p>
           </div>
           <div>

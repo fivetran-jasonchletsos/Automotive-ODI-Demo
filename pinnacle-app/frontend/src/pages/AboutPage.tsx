@@ -105,7 +105,7 @@ export default function AboutPage() {
             <h3 className="font-display text-lg tracking-wide text-graphite-900">Open lake-centric</h3>
             <ul className="mt-3 space-y-2 text-sm text-graphite-700">
               <li>· Customer owns the storage (S3 + Iceberg)</li>
-              <li>· Any compute — Snowflake, Athena, Trino, Spark — same gold layer</li>
+              <li>· Snowflake, Athena, Trino read the same Iceberg bytes — external catalogs, no extracts</li>
               <li>· Telemetry stream lands once, queried by humans and agents</li>
               <li>· Iceberg time-travel keeps the audit trail for recall investigations</li>
               <li>· Schema evolution is in the spec, vendor-neutral</li>
@@ -128,18 +128,18 @@ export default function AboutPage() {
 }
 
 const PILLARS = [
-  { tag: 'Pillar 1', title: 'Customer-owned storage', body: 'Every byte of OEM, DMS, and telemetry data lands in Pinnacle\'s S3 bucket as Apache Iceberg tables. Fivetran writes; the OEM reads with any engine.' },
+  { tag: 'Pillar 1', title: 'Customer-owned storage', body: 'Fivetran lands every CDC row into Iceberg (MDLS) on Pinnacle\'s S3 bucket — one copy of the bytes, in open Apache Iceberg format. Fivetran writes; the OEM reads with any engine.' },
   { tag: 'Pillar 2', title: 'Open table format',     body: 'Iceberg v2 brings ACID transactions, schema evolution, and time-travel — critical for warranty investigations and recall traceability.' },
-  { tag: 'Pillar 3', title: 'Any compute engine',    body: 'Snowflake serves the executive dashboards; dbt builds the semantic layer; predictive-maintenance agents read the same gold tables.' },
+  { tag: 'Pillar 3', title: 'Multi-engine reads',    body: 'Snowflake, Athena, and Trino read the same Iceberg bytes via external catalogs — no copies, no extracts. Fivetran Transformations triggers dbt Labs the moment the source sync finishes.' },
 ];
 
 const STACK = [
-  { layer: 'Ingest',    name: 'Fivetran connectors',         note: 'SAP S/4HANA · Dealertrack DMS · Manheim · Telemetry Kafka · Salesforce · J.D. Power.' },
-  { layer: 'Storage',   name: 'Amazon S3',                    note: 'pinnacle-odi-lake bucket holds bronze · silver · gold prefixes.' },
-  { layer: 'Format',    name: 'Apache Iceberg v2',            note: 'Parquet files, ZSTD compression, Glue catalog.' },
+  { layer: 'Source',    name: 'Six operational systems',     note: 'SAP S/4HANA · Dealertrack DMS · Manheim · Telemetry Kafka · Salesforce · J.D. Power.' },
+  { layer: 'Ingest',    name: 'Fivetran connectors',         note: 'CDC + batch + stream landing into Iceberg (MDLS). 750+ source library.' },
+  { layer: 'Lake',      name: 'Iceberg (MDLS) on S3',         note: 'pinnacle-odi-lake bucket · open Apache Iceberg v2 · Parquet · ZSTD · one copy of the bytes.' },
   { layer: 'Catalog',   name: 'AWS Glue Data Catalog',        note: 'Iceberg REST + table-level access control.' },
-  { layer: 'Transform', name: 'dbt',                          note: 'Iceberg-native materializations across bronze/silver/gold.' },
-  { layer: 'Query',     name: 'Snowflake + Athena',           note: 'Same Iceberg tables, two engines — executive BI and ad-hoc.' },
+  { layer: 'Compute',   name: 'Snowflake / Athena / Trino',  note: 'External Iceberg reads — same bytes, no copies, no extracts.' },
+  { layer: 'Transform', name: 'dbt Labs',                     note: 'Triggered by Fivetran Transformations on sync completion. bronze → silver → gold, all in Iceberg.' },
   { layer: 'Frontend',  name: 'React 18 + Vite + Tailwind',   note: 'Static SPA on GitHub Pages, reads JSON snapshot of gold.' },
   { layer: 'Charts',    name: 'Recharts + custom SVG',        note: 'Spec-sheet aesthetic — tight gridlines, monospace numerics.' },
 ];

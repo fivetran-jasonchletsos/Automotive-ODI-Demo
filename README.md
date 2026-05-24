@@ -10,9 +10,24 @@ Live demo: https://fivetran-jasonchletsos.github.io/Automotive-ODI-Demo/
 ## What this demonstrates
 
 - Customer-owned storage on Apache Iceberg (S3 + Glue catalog).
-- Fivetran connectors landing six sources into the OEM's lake — no warehouse lock-in.
-- dbt building the bronze / silver / gold semantic layer on Iceberg.
-- Snowflake, Athena, and the predictive-maintenance agent reading the same gold tables.
+- Fivetran connectors landing six sources into Iceberg (MDLS) on S3 — one copy of the bytes, open format.
+- Snowflake, Athena, and Trino reading the same Iceberg bytes via external catalogs — no copies, no extracts.
+- Fivetran Transformations triggering dbt Labs the moment the source sync finishes; bronze → silver → gold stays in Iceberg.
+
+## Canonical pipeline flow
+
+```
+[Source]  →  Fivetran  →  Iceberg (MDLS)  →  Snowflake / Athena / Trino  →  dbt Labs  →  React
+  SAP                       on S3                  external                triggered     SPA
+  Dealertrack              (Apache              Iceberg reads             by Fivetran    on
+  Manheim                  Iceberg v2)          (no copies,                Transformations  Pages
+  Telemetry                                     no extracts)
+  Salesforce
+  J.D. Power
+```
+
+bronze → silver → gold layers all live in Iceberg. Snowflake is the primary compute; Athena
+and Trino read the same files for ad-hoc and lake-native workloads.
 
 ## Data sources (synthetic)
 
