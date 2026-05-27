@@ -140,7 +140,7 @@ const STACK = [
   { layer: 'Catalog',   name: 'AWS Glue Data Catalog',        note: 'Iceberg REST + table-level access control.' },
   { layer: 'Compute',   name: 'Snowflake / Athena / Trino',  note: 'External Iceberg reads — same bytes, no copies, no extracts.' },
   { layer: 'Transform', name: 'dbt Labs',                     note: 'Triggered by Fivetran Transformations on sync completion. bronze → silver → gold, all in Iceberg.' },
-  { layer: 'Frontend',  name: 'React 18 + Vite + Tailwind',   note: 'Static SPA on GitHub Pages, reads JSON snapshot of gold.' },
+  { layer: 'Frontend',  name: 'React 18 + Vite + Tailwind',   note: 'Static SPA on GitHub Pages, reads the gold layer via Snowflake / Athena / Trino.' },
   { layer: 'Charts',    name: 'Recharts + custom SVG',        note: 'Spec-sheet aesthetic — tight gridlines, monospace numerics.' },
 ];
 
