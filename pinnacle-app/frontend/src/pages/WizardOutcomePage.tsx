@@ -79,8 +79,12 @@ export default function WizardOutcomePage() {
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL?.replace(/\/$/, '') + '/data/wizard_outcome.json')
-      .then(r => r.json())
-      .then(setO);
+      .then(r => {
+        if (!r.ok) throw new Error(`Failed to fetch wizard_outcome.json: ${r.status}`);
+        return r.json();
+      })
+      .then(setO)
+      .catch(() => {});
   }, []);
 
   if (!o) {
